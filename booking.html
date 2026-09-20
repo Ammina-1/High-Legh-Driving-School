@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>High Legh Driving School</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="output.css">
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#B2C2AE]">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <header class="relative flex items-center bg-[#D9D9D9] px-8 py-3 min-h-[90px]">
+
+        <!-- Business name -->
+        <h1 class="text-2xl leading-tight font-['Italiana']">
+            HIGH LEGH<br>
+            DRIVING SCHOOL
+        </h1>
+
+        <!-- Navigation -->
+        <nav class="absolute right-[110px] bottom-0 flex items-stretch">
+
+            <a href="index.html"
+                class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
+                       font-['Italiana'] text-sm flex items-center
+                       transition-all duration-300 hover:bg-[#9AA698]">
+                Home
+            </a>
+
+            <a href="about.html"
+                class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
+                       font-['Italiana'] text-sm flex items-center
+                       transition-all duration-300 hover:bg-[#9AA698]">
+                About Us
+            </a>
+
+            <a href="prices.html"
+                class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
+                       font-['Italiana'] text-sm flex items-center
+                       transition-all duration-300 hover:bg-[#9AA698]">
+                Prices
+            </a>
+
+            <a href="index.html#contact"
+                class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
+                       font-['Italiana'] text-sm flex items-center
+                       transition-all duration-300 hover:bg-[#9AA698]">
+                Contact Us
+            </a>
+
+            <a href="booking.html"
+                class="bg-[#889485] px-4 py-5
+                       font-['Italiana'] text-sm flex items-center
+                       transition-all duration-300 hover:bg-[#9AA698]">
+                Book Now
+            </a>
+
+        </nav>
+
+        <!-- Header logo -->
+        <img
+            src="logo.png"
+            alt="High Legh Driving School logo"
+            class="absolute right-5 top-1/2 -translate-y-1/2
+                   w-20 h-auto opacity-60">
+
+    </header> 
+    <main class="flex-1">
+        <!-- BOOKING HERO -->
+        <section class="bg-[#495047] px-[10%] py-14 font-['Italiana'] text-[#D9D9D9]">
+            <p class="text-lg mb-3">BOOK YOUR LESSON</p>
+            <h1 class="text-4xl sm:text-5xl lg:text-7xl leading-tight">
+                LET'S GET YOU<br>
+                ON THE ROAD.
+            </h1>
+            <p class="text-xl mt-5">Choose your lesson, date and time below.</p>
+        </section>
+
+        <!-- BOOKING FORM -->
+        <section class="bg-[#D9D9D9] px-[10%] py-16 font-['Italiana'] text-[#495047]">
+            <div class="flex flex-col gap-16 lg:flex-row">
+                <!-- LEFT: BOOKING DETAILS -->
+                <div class="w-full min-w-0 lg:flex-[65]">
+                    <p class="text-sm mb-2">STEP 01</p>
+                    <h2 class="text-4xl mb-6">
+                        <label for="booking-lesson">CHOOSE YOUR LESSON.</label>
+                    </h2>
+                    <select id="booking-lesson" name="lesson"
+                        class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                        <option value="single" data-lesson="90-minute lesson" data-price="£59">90-minute lesson — £59</option>
+                        <option value="block" data-lesson="10 lesson block" data-price="£570">10 lesson block — £570</option>
+                        <option value="intro" data-lesson="New pupil offer: 3 × 90-minute lessons" data-price="£175">New pupil offer: 3 × 90-minute lessons — £175</option>
+                    </select>
+
+                    <!-- DATE -->
+                    <p class="text-sm mt-10 mb-2">STEP 02</p>
+                    <h2 class="text-4xl mb-6">
+                        <label for="booking-date">CHOOSE A DATE.</label>
+                    </h2>
+                    <input id="booking-date" name="date" type="date"
+                        class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+
+                    <!-- TIME -->
+                    <p class="text-sm mt-10 mb-2">STEP 03</p>
+                    <h2 class="text-4xl mb-6">CHOOSE A TIME.</h2>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button type="button" data-booking-time="9:00 AM" aria-pressed="false"
+                            class="border border-[#495047] py-4 hover:bg-[#B2C2AE] aria-pressed:bg-[#B2C2AE] transition-all duration-300">
+                            9:00 AM
+                        </button>
+                        <button type="button" data-booking-time="11:00 AM" aria-pressed="false"
+                            class="border border-[#495047] py-4 hover:bg-[#B2C2AE] aria-pressed:bg-[#B2C2AE] transition-all duration-300">
+                            11:00 AM
+                        </button>
+                        <button type="button" data-booking-time="1:30 PM" aria-pressed="false"
+                            class="border border-[#495047] py-4 hover:bg-[#B2C2AE] aria-pressed:bg-[#B2C2AE] transition-all duration-300">
+                            1:30 PM
+                        </button>
+                    </div>
+                    <p class="text-sm mt-3 opacity-70">
+                        Available times will depend on the date selected.
+                    </p>
+
+                    <!-- STEP 04 — YOUR DETAILS -->
+                    <div class="mt-12">
+                        <p class="text-sm mb-2">STEP 04</p>
+                        <h2 class="text-4xl mb-6">YOUR DETAILS.</h2>
+
+                        <div class="flex flex-col gap-4">
+                            <div>
+                                <label for="full-name" class="block text-sm mb-2">
+                                    FULL NAME (REQUIRED)
+                                </label>
+                                <input
+                                    type="text"
+                                    id="full-name"
+                                    name="full-name"
+                                    autocomplete="name"
+                                    required
+                                    class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                            </div>
+
+                            <div>
+                                <label for="booking-phone" class="block text-sm mb-2">
+                                    PHONE NUMBER (REQUIRED)
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="booking-phone"
+                                    name="phone"
+                                    autocomplete="tel"
+                                    required
+                                    class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                            </div>
+
+                            <div>
+                                <label for="booking-email" class="block text-sm mb-2">
+                                    EMAIL ADDRESS (OPTIONAL)
+                                </label>
+                                <input
+                                    type="email"
+                                    id="booking-email"
+                                    name="email"
+                                    autocomplete="email"
+                                    class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: SUMMARY -->
+                <aside aria-live="polite" class="w-full min-w-0 lg:flex-[35] lg:border-l border-[#495047] lg:pl-10">
+                    <p class="text-sm mb-2">YOUR BOOKING</p>
+                    <h2 class="text-4xl mb-8">SUMMARY.</h2>
+                    <div class="border-t border-[#495047] py-4">
+                        <p class="text-sm">LESSON</p>
+                        <p id="summary-lesson" class="text-lg mt-1">90-minute lesson</p>
+                    </div>
+                    <div class="border-t border-[#495047] py-4">
+                        <p class="text-sm">DATE</p>
+                        <p id="summary-date" class="text-lg mt-1">Select a date</p>
+                    </div>
+                    <div class="border-t border-[#495047] py-4">
+                        <p class="text-sm">TIME</p>
+                        <p id="summary-time" class="text-lg mt-1">Select a time</p>
+                    </div>
+                    <div class="border-t border-[#495047] py-4">
+                        <p class="text-sm">PRICE</p>
+                        <p id="summary-price" class="text-3xl mt-1">£59</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- =========================
+     FOOTER
+========================== -->
+<footer class="bg-[#495047] text-[#D9D9D9] font-['Italiana'] px-[8%] py-8">
+
+    <div class="flex items-center justify-between">
+
+        <!-- Left -->
+        <div>
+            <h2 class="text-2xl leading-tight">
+                HIGH LEGH<br>
+                DRIVING SCHOOL
+            </h2>
+
+            <p class="text-sm mt-3">
+                Building safe drivers for life.
+            </p>
+        </div>
+
+
+        <!-- Centre -->
+        <div class="text-center text-sm leading-relaxed">
+            <p>Manual driving lessons</p>
+            <p>High Legh & surrounding areas</p>
+            <p>Female driving instructor</p>
+        </div>
+
+
+        <!-- Right -->
+        <div class="flex items-center gap-5">
+
+            <div class="text-right text-sm">
+                <p>Woman-owned local business</p>
+                <p class="mt-2">© 2026 High Legh Driving School</p>
+            </div>
+
+            <img
+                src="logo.png"
+                alt="High Legh Driving School logo"
+                class="w-20 h-auto">
+
+        </div>
+
+    </div>
+
+</footer>
+<script src="booking.js"></script>
+</body>
+</html>
