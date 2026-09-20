@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
 
     <!-- Tailwind -->
-    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="{% static 'website/output.css' %}">
 </head>
 <!-- =========================
          HEADER
@@ -29,35 +30,35 @@
         <!-- Navigation -->
         <nav class="absolute right-[110px] bottom-0 flex items-stretch">
 
-            <a href="index.html"
+            <a href="{% url 'home' %}"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
                 Home
             </a>
 
-            <a href="about.html"
+            <a href="{% url 'about' %}"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
                 About Us
             </a>
 
-            <a href="prices.html"
+            <a href="{% url 'prices' %}"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
                 Prices
             </a>
 
-            <a href="index.html#contact"
+            <a href="{% url 'home' %}#contact"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
                 Contact Us
             </a>
 
-            <a href="booking.html"
+            <a href="{% url 'booking' %}"
                 class="bg-[#889485] px-4 py-5
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
@@ -68,7 +69,7 @@
 
         <!-- Header logo -->
         <img
-            src="logo.png"
+            src="{% static 'website/logo.png' %}"
             alt="High Legh Driving School logo"
             class="absolute right-5 top-1/2 -translate-y-1/2
                    w-20 h-auto opacity-60">
@@ -119,7 +120,7 @@
             </div>
 
             <img
-                src="Katie.jpeg"
+                src="{% static 'website/Katie.jpeg' %}"
                 alt="Katie, driving instructor at High Legh Driving School"
                 class="block w-full h-full rounded-full object-cover object-center">
         </div>
@@ -233,7 +234,7 @@
     </div>
 
     <div class="mt-12">
-        <a href="booking.html"
+        <a href="{% url 'booking' %}"
            class="inline-block bg-[#495047] text-[#D9D9D9]
                   px-7 py-4 text-lg
                   transition-all duration-300
@@ -283,7 +284,7 @@
             </div>
 
             <img
-                src="logo.png"
+                src="{% static 'website/logo.png' %}"
                 alt="High Legh Driving School logo"
                 class="w-20 h-auto">
 

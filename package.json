@@ -2,5 +2,8 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "tailwindcss": "^4.3.3"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i input.css -o website/static/website/output.css"
   }
 }
