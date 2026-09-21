@@ -1,2 +1,33 @@
 node_modules/
 .DS_Store
+
+# Local Python runtime and virtual environment
+.venv/
+.python-runtime/
+__pycache__/
+*.py[cod]
+
+# Local SQLite databases and transaction files
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Local environment configuration (keep sanitised examples trackable)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Other virtual environments and local test output
+venv/
+env/
+.env/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/

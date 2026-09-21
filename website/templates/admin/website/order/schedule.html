@@ -1,0 +1,24 @@
+{% extends "admin/base_site.html" %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">Home</a> &rsaquo;
+    <a href="{% url 'admin:website_order_changelist' %}">Orders</a> &rsaquo;
+    <a href="{% url 'admin:website_order_change' order.pk %}">{{ order }}</a> &rsaquo;
+    Schedule next lesson
+</div>
+{% endblock %}
+{% block content %}
+<p>{{ order.pupil.name }} — {{ order.get_package_display }}</p>
+<p>{{ order.lessons_remaining }} lesson{{ order.lessons_remaining|pluralize }} remaining to schedule.</p>
+{% if has_remaining %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>The lesson number is assigned automatically. Times are shown in UK local time.</p>
+    <input type="submit" value="Schedule lesson">
+</form>
+{% else %}
+<p>All lessons in this package are already scheduled.</p>
+{% endif %}
+<p><a href="{% url 'admin:website_order_change' order.pk %}">Back to order</a></p>
+{% endblock %}

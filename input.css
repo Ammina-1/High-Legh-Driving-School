@@ -1,1 +1,57 @@
 @import "tailwindcss"; 
+
+/* Navigation feedback shared by the public pages. */
+header nav a[aria-current] {
+    background-color: #495047;
+    color: #D9D9D9;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+}
+header nav a:focus-visible,
+#mobile-menu summary:focus-visible {
+    outline: 2px solid #495047;
+    outline-offset: -4px;
+}
+header nav a[aria-current]:focus-visible {
+    outline-color: #D9D9D9;
+}
+@media (prefers-reduced-motion: reduce) {
+    header nav a { transition: none; }
+}
+
+#booking-form :is(input, select, button, a):focus-visible {
+    outline: 2px solid #495047;
+    outline-offset: 3px;
+}
+#booking-form [aria-invalid="true"] { border: 2px solid #b91c1c; }
+#booking-form .date-button[aria-pressed="true"],
+#booking-form .time-option:has(input:checked) > span {
+    background-color: #495047;
+    color: #D9D9D9;
+    box-shadow: inset 0 -3px 0 #B2C2AE;
+}
+#booking-form select { border-width: 2px; }
+#booking-form button:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+#booking-form .time-option > span { min-height: 48px; }
+@media (prefers-reduced-motion: reduce) {
+    #booking-form * { transition: none; animation: none; }
+    #booking-form button:hover { transform: none; }
+}
+
+.skip-link { position: absolute; top: 0; left: 1rem; transform: translateY(-150%); z-index: 100; padding: 1rem; background: #495047; color: #fff; }
+.skip-link:focus { transform: translateY(0); }
+:is(a, button, input, select, textarea, summary):focus-visible {
+    outline: 3px solid #495047;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px #D9D9D9;
+}
+.home-katie :is(h2, p, a) { color: #20251f; }
+a.bg-\[\#889485\], button.bg-\[\#889485\] { color: #20251f; }
+#contact-form button { min-height: 44px; }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    a:hover, button:hover { transform: none !important; }
+}
+
+/* Keep sage button text readable in its darker hover state. */
+#contact-form button:hover { color: #171C16; }

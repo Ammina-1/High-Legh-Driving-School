@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>High Legh Driving School</title>
+    <title>Driving Lessons | High Legh Driving School</title>
+    <meta name="description" content="Calm, patient manual driving lessons in High Legh and surrounding areas.">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,22 +19,23 @@
 </head>
 
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- =========================
          HEADER
     ========================== -->
-    <header class="relative flex items-center bg-[#D9D9D9] px-8 py-3 min-h-[90px]">
+    <header class="relative flex items-center bg-[#D9D9D9] px-4 sm:px-8 py-3 min-h-[90px]">
 
         <!-- Business name -->
-        <h1 class="text-2xl leading-tight font-['Italiana']">
+        <p class="text-xl sm:text-2xl leading-tight font-['Italiana']">
             HIGH LEGH<br>
             DRIVING SCHOOL
-        </h1>
+        </p>
 
         <!-- Navigation -->
-        <nav class="absolute right-[110px] bottom-0 flex items-stretch">
+        <nav aria-label="Main navigation" class="absolute right-[110px] bottom-0 hidden lg:flex items-stretch">
 
-            <a href="{% url 'home' %}"
+            <a href="{% url 'home' %}" aria-current="page"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
@@ -70,17 +72,33 @@
 
         </nav>
 
+        <details id="mobile-menu" class="group ml-auto lg:hidden">
+            <summary aria-controls="mobile-navigation" aria-label="Open navigation" class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center text-[#495047] [&::-webkit-details-marker]:hidden">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18M3 12h18M3 18h18" class="group-open:hidden" />
+                    <path d="m6 6 12 12M18 6 6 18" class="hidden group-open:block" />
+                </svg>
+            </summary>
+            <nav id="mobile-navigation" aria-label="Mobile navigation" class="absolute inset-x-0 top-full z-50 flex flex-col bg-[#889485] shadow-lg font-['Italiana']">
+                <a href="{% url 'home' %}" aria-current="page" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Home</a>
+                <a href="{% url 'about' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">About Us</a>
+                <a href="{% url 'prices' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Prices</a>
+                <a href="{% url 'home' %}#contact" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Contact Us</a>
+                <a href="{% url 'booking' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Book Now</a>
+            </nav>
+        </details>
+
         <!-- Header logo -->
         <img
             src="{% static 'website/logo.png' %}"
-            alt="High Legh Driving School logo"
-            class="absolute right-5 top-1/2 -translate-y-1/2
-                   w-20 h-auto opacity-60">
+            alt=""
+            class="hidden sm:block w-14 mx-4 lg:mx-0 lg:absolute lg:right-5 lg:top-1/2 lg:-translate-y-1/2
+                   lg:w-20 h-auto opacity-60">
 
     </header>
 
 
-    <main>
+    <main id="main-content" tabindex="-1">
 
         <!-- =========================
              HERO
@@ -88,70 +106,70 @@
         <section
             class="relative overflow-hidden bg-[#495047] min-h-[420px]
                    flex flex-col items-center justify-center
-                   text-center text-white">
+                   text-center text-white px-4 py-10 lg:px-0 lg:py-0">
 
 
             <!-- Faded logo pattern -->
-<div class="absolute inset-0 opacity-10 overflow-hidden">
+<div aria-hidden="true" class="pointer-events-none absolute inset-0 opacity-10 overflow-hidden">
 
     <!-- Row 1 -->
-    <div class="absolute top-[15px] left-[2%] flex gap-[125px]">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
+    <div class="absolute top-[15px] left-[2%] flex gap-10 sm:gap-20 lg:gap-[125px]">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
     </div>
 
     <!-- Row 2 - shifted right -->
-    <div class="absolute top-[115px] left-[8%] flex gap-[125px]">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
+    <div class="absolute top-[115px] left-[8%] flex gap-10 sm:gap-20 lg:gap-[125px]">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
     </div>
 
     <!-- Row 3 -->
-    <div class="absolute top-[215px] left-[2%] flex gap-[125px]">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
+    <div class="absolute top-[215px] left-[2%] flex gap-10 sm:gap-20 lg:gap-[125px]">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
     </div>
 
     <!-- Row 4 - shifted right -->
-    <div class="absolute top-[315px] left-[8%] flex gap-[125px]">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
-        <img src="{% static 'website/logo.png' %}" alt="" class="w-20 h-auto shrink-0">
+    <div class="absolute top-[315px] left-[8%] flex gap-10 sm:gap-20 lg:gap-[125px]">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
+        <img src="{% static 'website/logo.png' %}" alt="" class="w-14 sm:w-16 lg:w-20 h-auto shrink-0">
     </div>
 
 </div> 
 
 
             <!-- Hero heading -->
-            <h2 class="relative z-10 font-['Italiana'] text-7xl leading-tight">
+            <h1 class="relative z-10 font-['Italiana'] text-3xl sm:text-6xl lg:text-7xl leading-tight">
                 BUILDING SAFE<br>
                 DRIVERS FOR LIFE
-            </h2>
+            </h1>
 
 
             <!-- Hero subtitle -->
-            <p class="relative z-10 font-['Italiana'] text-xl mt-6">
+            <p class="relative z-10 font-['Italiana'] text-lg sm:text-xl mt-6">
                 Calm, patient manual driving<br>
                 lessons in High Legh &<br>
                 surrounding areas
@@ -163,14 +181,14 @@
         <!-- =========================
              MEET KATIE
         ========================== -->
-        <section class="relative h-[280px] overflow-hidden bg-[#B2C2AE]">
+        <section class="home-katie relative flex flex-col items-center gap-6 px-6 py-10 xl:block xl:px-0 xl:py-0 xl:h-[280px] overflow-hidden bg-[#B2C2AE]">
 
 
             <!-- Semicircle -->
             <div
                 class="absolute
                        top-0 left-0
-                       w-[1207px] h-[300px]
+                       w-full h-full xl:w-[1207px] xl:h-[300px]
                        rounded-t-full
                        bg-[#495047]
                        opacity-37">
@@ -180,13 +198,13 @@
             <!-- About text -->
             <div
                 class="relative z-10
-                       flex h-[290px] w-[650px]
-                       ml-[20%] -translate-y-2
+                       flex w-full xl:h-[290px] xl:w-[650px]
+                       xl:ml-[20%] xl:-translate-y-2
                        items-center justify-center">
 
                 <div class="text-center font-['Italiana'] max-w-md">
 
-                    <h2 class="text-7xl mb-4 text-[#D9D9D9] leading-tight">
+                    <h2 class="text-4xl sm:text-6xl xl:text-7xl mb-4 text-[#D9D9D9] leading-tight">
                         MEET KATIE
                     </h2>
 
@@ -201,7 +219,7 @@
 
                     <a
                         href="{% url 'about' %}"
-                        class="inline-block mt-4 text-lg
+                        class="inline-block mt-4 py-2 xl:py-0 text-lg
                                text-[#D9D9D9] underline transition-transform duration-300 hover:translate-x-2">
                         Read my story →
                     </a>
@@ -215,8 +233,8 @@
             <img
                 src="{% static 'website/Katie.jpeg' %}"
                 alt="Katie, driving instructor at High Legh Driving School"
-                class="absolute right-0 top-0
-                       h-[340px] w-[18%]
+                class="relative w-full max-w-[320px] aspect-square xl:aspect-auto xl:max-w-none xl:absolute xl:right-0 xl:top-0
+                       xl:h-[340px] xl:w-[18%]
                        object-cover opacity-80">
 
         </section>
@@ -226,46 +244,49 @@
 ========================== -->
 <section id="contact"
     class="bg-[#D9D9D9] min-h-[420px]
-           flex items-center justify-between
-           px-[10%] py-12">
+           flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-0
+           px-6 sm:px-[10%] py-12">
 
     <!-- LEFT: Contact form -->
-    <div class="w-[45%] font-['Italiana']">
+    <div class="w-full min-w-0 lg:w-[45%] font-['Italiana']">
 
-        <h2 class="text-5xl text-[#495047] mb-7">
+        <h2 class="text-4xl sm:text-5xl text-[#495047] mb-7">
             GET IN TOUCH
         </h2>
 
-        <form id="contact-form" class="flex flex-col gap-4">
+        <form id="contact-form" aria-label="Contact Katie" class="flex flex-col gap-4">
 
             <!-- Name -->
-            <input
+            <label class="sr-only" for="name">Name</label>
+<input
                 type="text"
                 id="name"
                 placeholder="Name"
-                class="bg-[#495047] text-white
+                class="w-full min-w-0 bg-[#495047] text-white
                        placeholder:text-[#D9D9D9]
                        px-5 py-4
                        font-['Italiana'] text-lg
                        outline-none">
 
             <!-- Phone number -->
-            <input
+            <label class="sr-only" for="phone">Phone number</label>
+<input
                 type="tel"
                 id="phone"
                 placeholder="Phone number"
-                class="bg-[#495047] text-white
+                class="w-full min-w-0 bg-[#495047] text-white
                        placeholder:text-[#D9D9D9]
                        px-5 py-4
                        font-['Italiana'] text-lg
                        outline-none">
 
             <!-- Query -->
-            <textarea
+            <label class="sr-only" for="message">How can I help?</label>
+<textarea
                 id="message"
                 rows="4"
                 placeholder="How can I help?"
-                class="bg-[#495047] text-white
+                class="w-full min-w-0 bg-[#495047] text-white
                        placeholder:text-[#D9D9D9]
                        px-5 py-4
                        font-['Italiana'] text-lg
@@ -277,7 +298,7 @@
                 class="bg-[#889485] text-[#D9D9D9]
                        font-['Italiana'] text-lg
                        px-6 py-4
-                       self-start
+                       w-full sm:w-auto self-start
                        transition-all duration-300
                        hover:scale-[1.03] hover:bg-[#798677]">
                 CONTINUE TO WHATSAPP →
@@ -289,9 +310,9 @@
 
 
     <!-- RIGHT: Contact message -->
-    <div class="w-[40%] font-['Italiana'] text-[#495047]">
+    <div class="w-full min-w-0 lg:w-[40%] font-['Italiana'] text-[#495047]">
 
-        <p class="text-5xl leading-tight">
+        <p class="text-4xl sm:text-5xl leading-tight">
             Questions about<br>
             availability,<br>
             lessons or getting started?
@@ -315,9 +336,10 @@
     <!-- =========================
      FOOTER
 ========================== -->
+</main>
 <footer class="bg-[#495047] text-[#D9D9D9] font-['Italiana'] px-[8%] py-8">
 
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col gap-8 lg:flex-row lg:gap-4 items-center justify-between text-center lg:text-left">
 
         <!-- Left -->
         <div>
@@ -341,16 +363,16 @@
 
 
         <!-- Right -->
-        <div class="flex items-center gap-5">
+        <div class="flex flex-col sm:flex-row items-center gap-5">
 
-            <div class="text-right text-sm">
+            <div class="text-center lg:text-right text-sm">
                 <p>Woman-owned local business</p>
                 <p class="mt-2">© 2026 High Legh Driving School</p>
             </div>
 
             <img
                 src="{% static 'website/logo.png' %}"
-                alt="High Legh Driving School logo"
+                alt=""
                 class="w-20 h-auto">
 
         </div>
@@ -365,7 +387,7 @@
     
     
     
-    </main>
+    
 
 
 <script>
@@ -398,7 +420,7 @@ ${message}`;
             `https://wa.me/${katieNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
         // Open WhatsApp
-        window.open(whatsappURL, "_blank");
+        window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
     });
 </script> 
@@ -410,6 +432,7 @@ ${message}`;
 
 
 
+<script src="{% static 'website/navigation.js' %}"></script>
 </body>
 
 </html> 

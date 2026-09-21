@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>High Legh Driving School</title>
+    <title>About Katie | High Legh Driving School</title>
+    <meta name="description" content="Meet Katie, your local driving instructor at High Legh Driving School.">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,19 +17,21 @@
     <!-- Tailwind -->
     <link rel="stylesheet" href="{% static 'website/output.css' %}">
 </head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <!-- =========================
          HEADER
     ========================== -->
-    <header class="relative flex items-center bg-[#D9D9D9] px-8 py-3 min-h-[90px]">
+    <header class="relative flex items-center bg-[#D9D9D9] px-4 sm:px-8 py-3 min-h-[90px]">
 
         <!-- Business name -->
-        <h1 class="text-2xl leading-tight font-['Italiana']">
+        <p class="text-xl sm:text-2xl leading-tight font-['Italiana']">
             HIGH LEGH<br>
             DRIVING SCHOOL
-        </h1>
+        </p>
 
         <!-- Navigation -->
-        <nav class="absolute right-[110px] bottom-0 flex items-stretch">
+        <nav aria-label="Main navigation" class="absolute right-[110px] bottom-0 hidden lg:flex items-stretch">
 
             <a href="{% url 'home' %}"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
@@ -37,7 +40,7 @@
                 Home
             </a>
 
-            <a href="{% url 'about' %}"
+            <a href="{% url 'about' %}" aria-current="page"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
@@ -67,23 +70,40 @@
 
         </nav>
 
+        <details id="mobile-menu" class="group ml-auto lg:hidden">
+            <summary aria-controls="mobile-navigation" aria-label="Open navigation" class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center text-[#464D44] [&::-webkit-details-marker]:hidden">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18M3 12h18M3 18h18" class="group-open:hidden" />
+                    <path d="m6 6 12 12M18 6 6 18" class="hidden group-open:block" />
+                </svg>
+            </summary>
+            <nav id="mobile-navigation" aria-label="Mobile navigation" class="absolute inset-x-0 top-full z-50 flex flex-col bg-[#889485] shadow-lg font-['Italiana']">
+                <a href="{% url 'home' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Home</a>
+                <a href="{% url 'about' %}" aria-current="page" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">About Us</a>
+                <a href="{% url 'prices' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Prices</a>
+                <a href="{% url 'home' %}#contact" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Contact Us</a>
+                <a href="{% url 'booking' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Book Now</a>
+            </nav>
+        </details>
+
         <!-- Header logo -->
         <img
             src="{% static 'website/logo.png' %}"
-            alt="High Legh Driving School logo"
-            class="absolute right-5 top-1/2 -translate-y-1/2
-                   w-20 h-auto opacity-60">
+            alt=""
+            class="hidden sm:block w-14 mx-4 lg:mx-0 lg:absolute lg:right-5 lg:top-1/2 lg:-translate-y-1/2
+                   lg:w-20 h-auto opacity-60">
 
     </header>
 
-    <section class="flex items-center justify-between gap-8 bg-[#495047] px-[10%] py-16 font-['Italiana'] text-[#D9D9D9]">
+    <main id="main-content" tabindex="-1">
+    <section class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 bg-[#495047] px-6 sm:px-[10%] py-10 sm:py-16 font-['Italiana'] text-[#D9D9D9]">
 
     <div>
     <p class="text-lg mb-3">
         WOMAN-OWNED • INDEPENDENT • LOCAL
     </p>
 
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight">
+    <h1 class="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight">
         MEET THE WOMAN<br>
         BEHIND THE WHEEL.
     </h1>
@@ -91,7 +111,7 @@
 
     <!-- Decorative steering wheel -->
     <svg aria-hidden="true" focusable="false" viewBox="0 0 240 240"
-         class="hidden lg:block w-[22%] max-w-[280px] shrink-0 text-[#B2C2AE] opacity-30"
+         class="block self-center lg:self-auto w-28 sm:w-36 lg:w-[22%] max-w-[280px] shrink-0 text-[#B2C2AE] opacity-30"
          fill="currentColor">
         <circle cx="120" cy="120" r="100" fill="none"
                 stroke="currentColor" stroke-width="20" />
@@ -107,7 +127,7 @@
      KATIE'S STORY
 ========================== -->
 
-<section class="relative bg-[#B2C2AE] px-[10%] py-10 overflow-hidden">
+<section class="relative bg-[#B2C2AE] px-6 sm:px-[10%] py-10 overflow-hidden">
 
     <div class="flex flex-col items-center gap-8 lg:flex-row lg:gap-12">
 
@@ -127,9 +147,9 @@
 
 
         <!-- Katie's story -->
-        <div class="w-full min-w-0 flex-1 font-['Italiana'] text-white">
+        <div class="w-full min-w-0 flex-1 font-['Italiana'] text-[#464D44]">
 
-            <h2 class="text-4xl mb-4">
+            <h2 class="text-3xl sm:text-4xl mb-4">
                 HI, I'M KATIE.
             </h2>
 
@@ -155,7 +175,7 @@
             </p>
 
             <!-- Pull quote -->
-            <p class="text-2xl leading-snug my-5 text-[#495047]
+            <p class="text-xl sm:text-2xl leading-snug my-5 text-[#464D44]
                       border-l-2 border-[#495047] pl-4">
                 I want my pupils to leave with the confidence to make good
                 decisions, stay calm in difficult situations and drive safely
@@ -189,17 +209,17 @@
      WHAT TO EXPECT
 ========================== -->
 
-<section class="bg-[#D9D9D9] px-[10%] py-14 font-['Italiana'] text-[#495047]">
+<section class="bg-[#D9D9D9] px-6 sm:px-[10%] py-14 font-['Italiana'] text-[#464D44]">
 
     <p class="text-lg mb-3">
         LEARNING WITH HIGH LEGH
     </p>
 
-    <h2 class="text-5xl mb-10">
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl mb-10">
         WHAT YOU CAN EXPECT.
     </h2>
 
-    <div class="grid grid-cols-3 gap-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
 
         <div class="border-t border-[#495047] pt-5">
             <h3 class="text-2xl mb-3">
@@ -233,9 +253,51 @@
 
     </div>
 
+    <section aria-labelledby="useful-reading-title" class="mt-14 border-t border-[#495047] pt-10">
+        <h2 id="useful-reading-title" class="text-3xl sm:text-4xl lg:text-5xl mb-8">USEFUL READING</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+            <article class="min-w-0 flex flex-col border-t border-[#495047] pt-5">
+                <h3 class="text-2xl leading-snug mb-3">The Official Highway Code</h3>
+                <p class="text-lg leading-relaxed mb-4">Rules and guidance to help you understand how to use the road safely.</p>
+                <a href="https://www.gov.uk/guidance/the-highway-code" target="_blank" rel="noopener noreferrer"
+                   aria-label="View resource: The Official Highway Code (opens in a new tab)"
+                   class="self-start mt-auto inline-flex items-center min-h-12 py-3 text-lg underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4">
+                    VIEW RESOURCE →
+                </a>
+            </article>
+            <article class="min-w-0 flex flex-col border-t border-[#495047] pt-5">
+                <h3 class="text-2xl leading-snug mb-3">Know Your Traffic Signs</h3>
+                <p class="text-lg leading-relaxed mb-4">Learn to recognise road signs and understand the information they give you.</p>
+                <a href="https://www.gov.uk/government/publications/know-your-traffic-signs" target="_blank" rel="noopener noreferrer"
+                   aria-label="View resource: Know Your Traffic Signs (opens in a new tab)"
+                   class="self-start mt-auto inline-flex items-center min-h-12 py-3 text-lg underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4">
+                    VIEW RESOURCE →
+                </a>
+            </article>
+            <article class="min-w-0 flex flex-col border-t border-[#495047] pt-5">
+                <h3 class="text-2xl leading-snug mb-3">The Official DVSA Theory Test for Car Drivers</h3>
+                <p class="text-lg leading-relaxed mb-4">Official revision guidance and practice questions for the multiple-choice theory test.</p>
+                <a href="https://www.safedrivingforlife.info/shop/the-official-dvsa-theory-test-car-drivers/" target="_blank" rel="noopener noreferrer"
+                   aria-label="View resource: The Official DVSA Theory Test for Car Drivers (opens in a new tab)"
+                   class="self-start mt-auto inline-flex items-center min-h-12 py-3 text-lg underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4">
+                    VIEW RESOURCE →
+                </a>
+            </article>
+            <article class="min-w-0 flex flex-col border-t border-[#495047] pt-5">
+                <h3 class="text-2xl leading-snug mb-3">The Official DVSA Guide to Driving – the essential skills</h3>
+                <p class="text-lg leading-relaxed mb-4">Build your understanding of the practical skills needed for safe, confident driving.</p>
+                <a href="https://www.safedrivingforlife.info/shop/official-dvsa-guide-driving-essential-skills/" target="_blank" rel="noopener noreferrer"
+                   aria-label="View resource: The Official DVSA Guide to Driving – the essential skills (opens in a new tab)"
+                   class="self-start mt-auto inline-flex items-center min-h-12 py-3 text-lg underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4">
+                    VIEW RESOURCE →
+                </a>
+            </article>
+        </div>
+    </section>
+
     <div class="mt-12">
         <a href="{% url 'booking' %}"
-           class="inline-block bg-[#495047] text-[#D9D9D9]
+           class="inline-block w-full sm:w-auto text-center bg-[#495047] text-[#D9D9D9]
                   px-7 py-4 text-lg
                   transition-all duration-300
                   hover:scale-[1.03]">
@@ -250,9 +312,10 @@
   <!-- =========================
      FOOTER
 ========================== -->
+</main>
 <footer class="bg-[#495047] text-[#D9D9D9] font-['Italiana'] px-[8%] py-8">
 
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col gap-8 lg:flex-row lg:gap-4 items-center justify-between text-center lg:text-left">
 
         <!-- Left -->
         <div>
@@ -276,20 +339,23 @@
 
 
         <!-- Right -->
-        <div class="flex items-center gap-5">
+        <div class="flex flex-col sm:flex-row items-center gap-5">
 
-            <div class="text-right text-sm">
+            <div class="text-center lg:text-right text-sm">
                 <p>Woman-owned local business</p>
                 <p class="mt-2">© 2026 High Legh Driving School</p>
             </div>
 
             <img
                 src="{% static 'website/logo.png' %}"
-                alt="High Legh Driving School logo"
+                alt=""
                 class="w-20 h-auto">
 
         </div>
 
     </div>
 
-</footer>  
+</footer>
+<script src="{% static 'website/navigation.js' %}"></script>
+</body>
+</html>

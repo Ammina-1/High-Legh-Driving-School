@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>High Legh Driving School</title>
+    <title>Book a Lesson | High Legh Driving School</title>
+    <meta name="description" content="Choose your driving lesson package and an available date and time.">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,20 +19,21 @@
 </head>
 
 <body class="min-h-screen flex flex-col bg-[#B2C2AE]">
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- =========================
          HEADER
     ========================== -->
-    <header class="relative flex items-center bg-[#D9D9D9] px-8 py-3 min-h-[90px]">
+    <header class="relative flex items-center bg-[#D9D9D9] px-4 sm:px-8 py-3 min-h-[90px]">
 
         <!-- Business name -->
-        <h1 class="text-2xl leading-tight font-['Italiana']">
+        <p class="text-xl sm:text-2xl leading-tight font-['Italiana']">
             HIGH LEGH<br>
             DRIVING SCHOOL
-        </h1>
+        </p>
 
         <!-- Navigation -->
-        <nav class="absolute right-[110px] bottom-0 flex items-stretch">
+        <nav aria-label="Main navigation" class="absolute right-[110px] bottom-0 hidden lg:flex items-stretch">
 
             <a href="{% url 'home' %}"
                 class="bg-[#889485] px-4 py-5 border-r border-[#D9D9D9]
@@ -61,7 +63,7 @@
                 Contact Us
             </a>
 
-            <a href="{% url 'booking' %}"
+            <a href="{% url 'booking' %}" aria-current="page"
                 class="bg-[#889485] px-4 py-5
                        font-['Italiana'] text-sm flex items-center
                        transition-all duration-300 hover:bg-[#9AA698]">
@@ -70,17 +72,33 @@
 
         </nav>
 
+        <details id="mobile-menu" class="group ml-auto lg:hidden">
+            <summary aria-controls="mobile-navigation" aria-label="Open navigation" class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center text-[#464D44] [&::-webkit-details-marker]:hidden">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18M3 12h18M3 18h18" class="group-open:hidden" />
+                    <path d="m6 6 12 12M18 6 6 18" class="hidden group-open:block" />
+                </svg>
+            </summary>
+            <nav id="mobile-navigation" aria-label="Mobile navigation" class="absolute inset-x-0 top-full z-50 flex flex-col bg-[#889485] shadow-lg font-['Italiana']">
+                <a href="{% url 'home' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Home</a>
+                <a href="{% url 'about' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">About Us</a>
+                <a href="{% url 'prices' %}" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Prices</a>
+                <a href="{% url 'home' %}#contact" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Contact Us</a>
+                <a href="{% url 'booking' %}" aria-current="page" class="min-h-12 px-6 py-4 hover:bg-[#9AA698] focus-visible:outline-2 focus-visible:outline-offset-[-4px]">Book Now</a>
+            </nav>
+        </details>
+
         <!-- Header logo -->
         <img
             src="{% static 'website/logo.png' %}"
-            alt="High Legh Driving School logo"
-            class="absolute right-5 top-1/2 -translate-y-1/2
-                   w-20 h-auto opacity-60">
+            alt=""
+            class="hidden sm:block w-14 mx-4 lg:mx-0 lg:absolute lg:right-5 lg:top-1/2 lg:-translate-y-1/2
+                   lg:w-20 h-auto opacity-60">
 
     </header> 
-    <main class="flex-1">
+    <main id="main-content" tabindex="-1" class="flex-1">
         <!-- BOOKING HERO -->
-        <section class="bg-[#495047] px-[10%] py-14 font-['Italiana'] text-[#D9D9D9]">
+        <section class="bg-[#495047] px-6 sm:px-[10%] py-10 lg:py-14 font-['Italiana'] text-[#D9D9D9]">
             <p class="text-lg mb-3">BOOK YOUR LESSON</p>
             <h1 class="text-4xl sm:text-5xl lg:text-7xl leading-tight">
                 LET'S GET YOU<br>
@@ -90,67 +108,117 @@
         </section>
 
         <!-- BOOKING FORM -->
-        <section class="bg-[#D9D9D9] px-[10%] py-16 font-['Italiana'] text-[#495047]">
-            <div class="flex flex-col gap-16 lg:flex-row">
+        <section class="bg-[#D9D9D9] px-6 sm:px-[10%] py-10 lg:py-16 font-['Italiana'] text-[#464D44]">
+            <div class="flex flex-col gap-10 lg:gap-16 lg:flex-row">
                 <!-- LEFT: BOOKING DETAILS -->
-                <div class="w-full min-w-0 lg:flex-[65]">
+                <form id="booking-form" method="POST" class="w-full min-w-0 lg:flex-[65]">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div id="booking-errors" class="mb-6 border-l-4 border-red-700 p-4" role="alert" tabindex="-1">
+                            <p class="text-lg">Please check your booking details.</p>
+                            <ul class="mt-2 list-disc pl-5">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li><a class="underline" href="#error-{{ field.name }}">{{ field.label }}: {{ error }}</a></li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     <p class="text-sm mb-2">STEP 01</p>
-                    <h2 class="text-4xl mb-6">
+                    <h2 class="text-3xl sm:text-4xl mb-6">
                         <label for="booking-lesson">CHOOSE YOUR LESSON.</label>
                     </h2>
-                    <select id="booking-lesson" name="lesson"
-                        class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
-                        <option value="single" data-lesson="90-minute lesson" data-price="£59">90-minute lesson — £59</option>
-                        <option value="block" data-lesson="10 lesson block" data-price="£570">10 lesson block — £570</option>
-                        <option value="intro" data-lesson="New pupil offer: 3 × 90-minute lessons" data-price="£175">New pupil offer: 3 × 90-minute lessons — £175</option>
+                    <select id="booking-lesson" name="package" required {% if form.package.errors %}aria-invalid="true" aria-describedby="error-package"{% endif %}
+                        class="w-full min-w-0 max-w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                        <option value="single" {% if form.package.value == "single" %}selected{% endif %} data-lesson="90-minute lesson" data-price="£59">90-minute lesson — £59</option>
+                        <option value="block" {% if form.package.value == "block" %}selected{% endif %} data-lesson="10 lesson block" data-price="£570">10 lesson block — £570</option>
+                        <option value="intro" {% if form.package.value == "intro" %}selected{% endif %} data-lesson="New pupil offer: 3 × 90-minute lessons" data-price="£175">New pupil offer: 3 × 90-minute lessons — £175</option>
                     </select>
+                    {% if form.package.errors %}<p id="error-package" tabindex="-1" class="mt-2 text-sm text-red-700">{{ form.package.errors.0 }}</p>{% endif %}
 
+                    {% if available_slots %}
                     <!-- DATE -->
                     <p class="text-sm mt-10 mb-2">STEP 02</p>
-                    <h2 class="text-4xl mb-6">
-                        <label for="booking-date">CHOOSE A DATE.</label>
-                    </h2>
-                    <input id="booking-date" name="date" type="date"
-                        class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                    <h2 class="text-3xl sm:text-4xl mb-6" id="date-heading">CHOOSE A DATE.</h2>
+                    <div class="flex flex-wrap gap-3" id="date-options" role="group" aria-labelledby="date-heading">
+                        {% regroup available_slots by starts_at|date:"Y-m-d" as slots_by_date %}
+                        {% for day in slots_by_date %}
+                            <button type="button" aria-pressed="false" aria-controls="time-options" aria-label="{{ day.list.0.starts_at|date:'l j F Y' }}"
+                                class="date-button border border-[#495047] px-5 py-3
+                                       transition-all duration-200 hover:bg-[#B2C2AE]
+                                       aria-pressed:bg-[#495047] aria-pressed:text-[#D9D9D9]"
+                                data-date="{{ day.grouper }}">
+                                {{ day.list.0.starts_at|date:"D d M" }}
+                            </button>
+                        {% empty %}
+                            <p>No lessons are currently available.</p>
+                        {% endfor %}
+                    </div>
 
                     <!-- TIME -->
                     <p class="text-sm mt-10 mb-2">STEP 03</p>
-                    <h2 class="text-4xl mb-6">CHOOSE A TIME.</h2>
-                    <div class="grid grid-cols-3 gap-3">
-                        <button type="button" data-booking-time="9:00 AM" aria-pressed="false"
-                            class="border border-[#495047] py-4 hover:bg-[#B2C2AE] aria-pressed:bg-[#B2C2AE] transition-all duration-300">
-                            9:00 AM
-                        </button>
-                        <button type="button" data-booking-time="11:00 AM" aria-pressed="false"
-                            class="border border-[#495047] py-4 hover:bg-[#B2C2AE] aria-pressed:bg-[#B2C2AE] transition-all duration-300">
-                            11:00 AM
-                        </button>
-                        <button type="button" data-booking-time="1:30 PM" aria-pressed="false"
-                            class="border border-[#495047] py-4 hover:bg-[#B2C2AE] aria-pressed:bg-[#B2C2AE] transition-all duration-300">
-                            1:30 PM
-                        </button>
+                    <h2 class="text-3xl sm:text-4xl mb-6" id="time-heading">CHOOSE A TIME.</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="time-options" role="group" aria-labelledby="time-heading">
+                        {% for slot in available_slots %}
+                            <label class="time-option cursor-pointer hidden"
+                                   data-date="{{ slot.starts_at|date:'Y-m-d' }}">
+                                <input type="radio" name="slot" {% if form.slot.errors %}aria-invalid="true" aria-describedby="error-slot"{% endif %} value="{{ slot.id }}"
+                                    {% if form.slot.value|stringformat:"s" == slot.id|stringformat:"s" %}checked{% endif %}
+                                    data-date="{{ slot.starts_at|date:'Y-m-d' }}"
+                                    aria-label="{{ slot.starts_at|date:'l j F Y g:i A T' }}"
+                                    data-time="{{ slot.starts_at|date:'g:i A' }}"
+                                    class="peer sr-only" required disabled>
+                                <span class="block border border-[#495047] px-4 py-3 text-center
+                                            transition-all duration-200
+                                            peer-checked:bg-[#495047]
+                                            peer-checked:text-[#D9D9D9]
+                                            peer-focus-visible:outline-2
+                                            peer-focus-visible:outline-offset-2
+                                            hover:bg-[#B2C2AE]">
+                                    {{ slot.starts_at|date:"g:i A" }}
+                                </span>
+                            </label>
+                        {% endfor %}
                     </div>
-                    <p class="text-sm mt-3 opacity-70">
-                        Available times will depend on the date selected.
+                    <p id="choose-date-message" class="mt-3" role="status">
+                        Choose an available date above to see times.
                     </p>
+
+                    {% else %}
+                    <div class="my-8 border border-[#495047] p-6" role="status">
+                        <p class="text-xl">No lessons are currently available.</p>
+                        <p class="mt-3">Please get in touch with Katie to ask about availability.</p>
+                        <a class="inline-block mt-4 py-3 underline" href="{% url 'home' %}#contact">GET IN TOUCH →</a>
+                    </div>
+                    {% endif %}
+                    {% if form.slot.errors %}<p id="error-slot" tabindex="-1" class="mt-2 text-sm text-red-700">{{ form.slot.errors.0 }}</p>{% endif %}
 
                     <!-- STEP 04 — YOUR DETAILS -->
                     <div class="mt-12">
                         <p class="text-sm mb-2">STEP 04</p>
-                        <h2 class="text-4xl mb-6">YOUR DETAILS.</h2>
+                        <h2 class="text-3xl sm:text-4xl mb-6">YOUR DETAILS.</h2>
 
                         <div class="flex flex-col gap-4">
                             <div>
                                 <label for="full-name" class="block text-sm mb-2">
-                                    FULL NAME (REQUIRED)
+                                    FIRST NAME &amp; SURNAME (REQUIRED)
                                 </label>
                                 <input
                                     type="text"
                                     id="full-name"
-                                    name="full-name"
+                                    name="name"
+                                    value="{{ form.name.value|default:'' }}"
+                                    {% if form.name.errors %}aria-invalid="true" aria-describedby="error-name"{% endif %}
                                     autocomplete="name"
                                     required
-                                    class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                                    class="w-full min-w-0 max-w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                                {% if form.name.errors %}
+                                    <p id="error-name" tabindex="-1" class="mt-2 text-sm text-red-700" role="alert">
+                                        {{ form.name.errors.0 }}
+                                    </p>
+                                {% endif %}
                             </div>
 
                             <div>
@@ -160,10 +228,19 @@
                                 <input
                                     type="tel"
                                     id="booking-phone"
-                                    name="phone"
+                                    name="phone_number"
+                                    value="{{ form.phone_number.value|default:'' }}"
+                                    {% if form.phone_number.errors %}aria-invalid="true" aria-describedby="error-phone_number"{% endif %}
                                     autocomplete="tel"
                                     required
-                                    class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                                    class="w-full min-w-0 max-w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                                {% if form.phone_number.errors %}
+                                    <div id="error-phone_number" tabindex="-1" class="mt-2 text-sm text-red-700" role="alert">
+                                        {% for error in form.phone_number.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div>
@@ -174,17 +251,30 @@
                                     type="email"
                                     id="booking-email"
                                     name="email"
-                                    autocomplete="email"
-                                    class="w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                                    value="{{ form.email.value|default:'' }}"
+                                    autocomplete="email" {% if form.email.errors %}aria-invalid="true" aria-describedby="error-email"{% endif %}
+                                    class="w-full min-w-0 max-w-full bg-[#B2C2AE] px-5 py-4 text-lg border border-[#495047]">
+                                {% if form.email.errors %}<p id="error-email" tabindex="-1" class="mt-2 text-sm text-red-700">{{ form.email.errors.0 }}</p>{% endif %}
                             </div>
                         </div>
                     </div>
-                </div>
+                    <button
+                        type="submit" {% if not available_slots %}disabled{% endif %}
+                        class="w-full sm:w-auto bg-[#495047] text-[#D9D9D9]
+                               font-['Italiana'] text-lg
+                               px-7 py-4 mt-8
+                               transition-all duration-300
+                               hover:scale-[1.03]">
+                        CONFIRM BOOKING →
+                    </button>
+                </form>
+                <p id="booking-status" class="sr-only" role="status" aria-live="polite"></p>
 
+                {% if available_slots %}
                 <!-- RIGHT: SUMMARY -->
-                <aside aria-live="polite" class="w-full min-w-0 lg:flex-[35] lg:border-l border-[#495047] lg:pl-10">
+                <aside aria-label="Booking summary" aria-live="polite" aria-atomic="true" class="w-full min-w-0 lg:flex-[35] lg:border-l border-[#495047] lg:pl-10">
                     <p class="text-sm mb-2">YOUR BOOKING</p>
-                    <h2 class="text-4xl mb-8">SUMMARY.</h2>
+                    <h2 class="text-3xl sm:text-4xl mb-8">SUMMARY.</h2>
                     <div class="border-t border-[#495047] py-4">
                         <p class="text-sm">LESSON</p>
                         <p id="summary-lesson" class="text-lg mt-1">90-minute lesson</p>
@@ -202,6 +292,7 @@
                         <p id="summary-price" class="text-3xl mt-1">£59</p>
                     </div>
                 </aside>
+                {% endif %}
             </div>
         </section>
     </main>
@@ -230,7 +321,7 @@
 ========================== -->
 <footer class="bg-[#495047] text-[#D9D9D9] font-['Italiana'] px-[8%] py-8">
 
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col gap-8 lg:flex-row lg:gap-4 items-center justify-between text-center lg:text-left">
 
         <!-- Left -->
         <div>
@@ -254,16 +345,16 @@
 
 
         <!-- Right -->
-        <div class="flex items-center gap-5">
+        <div class="flex flex-col sm:flex-row items-center gap-5">
 
-            <div class="text-right text-sm">
+            <div class="text-center lg:text-right text-sm">
                 <p>Woman-owned local business</p>
                 <p class="mt-2">© 2026 High Legh Driving School</p>
             </div>
 
             <img
                 src="{% static 'website/logo.png' %}"
-                alt="High Legh Driving School logo"
+                alt=""
                 class="w-20 h-auto">
 
         </div>
@@ -272,5 +363,6 @@
 
 </footer>
 <script src="{% static 'website/booking.js' %}"></script>
+<script src="{% static 'website/navigation.js' %}"></script>
 </body>
 </html>
