@@ -264,7 +264,8 @@ class PublicAccessibilityTests(TestCase):
                         assert {'noopener', 'noreferrer'} <= set(a.get('rel', '').split())
                         assert a.get('aria-label')
                 if tag == 'script' and a.get('src', '').startswith('/static/'):
-                    assert finders.find(a['src'][8:])
+                    from django.contrib.staticfiles.storage import staticfiles_storage
+                    assert finders.find(a['src'][8:]) or staticfiles_storage.exists(a['src'][8:])
         for url in ('/', '/about/', '/prices/', '/booking/'):
             with self.subTest(url=url):
                 response = self.client.get(url)

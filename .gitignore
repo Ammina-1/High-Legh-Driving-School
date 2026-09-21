@@ -31,3 +31,6 @@ env/
 .coverage
 .coverage.*
 htmlcov/
+
+# Generated collectstatic output; source static assets remain tracked
+/staticfiles/

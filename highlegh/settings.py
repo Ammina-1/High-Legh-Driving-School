@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+
+import dj_database_url
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -35,6 +37,38 @@ ALLOWED_HOSTS = [host.strip() for host in os.environ.get("DJANGO_ALLOWED_HOSTS",
 CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",") if origin.strip()]
 
 
+# HTTPS policy follows the environment at startup; local HTTP stays usable.
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SAMESITE = "Lax"
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "same-origin"
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"
+X_FRAME_OPTIONS = "DENY"
+
+# Opt in only behind a proxy that strips client-supplied X-Forwarded-Proto
+# and sets its own value. The application must not be publicly reachable directly.
+SECURE_PROXY_SSL_HEADER = None
+if not DEBUG and os.environ.get("DJANGO_TRUST_PROXY_SSL_HEADER", "false").strip().lower() in {"1", "true", "yes", "on"}:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = False
+USE_X_FORWARDED_PORT = False
+
+# Enable a short HSTS trial only after verifying real HTTPS and redirects.
+try:
+    hsts_seconds = int(os.environ.get("DJANGO_SECURE_HSTS_SECONDS", "0"))
+except ValueError:
+    raise ImproperlyConfigured("DJANGO_SECURE_HSTS_SECONDS must be a non-negative integer.") from None
+if hsts_seconds < 0:
+    raise ImproperlyConfigured("DJANGO_SECURE_HSTS_SECONDS must be a non-negative integer.")
+SECURE_HSTS_SECONDS = 0 if DEBUG else hsts_seconds
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,6 +83,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,12 +116,22 @@ WSGI_APPLICATION = 'highlegh.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+database_url = os.environ.get("DATABASE_URL", "").strip()
+if database_url:
+    try:
+        database_config = dj_database_url.parse(database_url, conn_max_age=0)
+    except (ValueError, KeyError):
+        raise ImproperlyConfigured("DATABASE_URL must be a valid PostgreSQL connection URL.") from None
+    if database_config["ENGINE"] != "django.db.backends.postgresql":
+        raise ImproperlyConfigured("DATABASE_URL must use PostgreSQL; leave it empty for local SQLite.")
+    DATABASES = {"default": database_config}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
 
 
 # Password validation
@@ -124,6 +169,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
